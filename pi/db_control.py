@@ -1,9 +1,13 @@
+import threading
+
 class DBController:
-    driver_address #String
-    ipv4_address #String
-    id #String
-    password #String
     
+    def __init__(self):
+        self.driver_address #String
+        self.ipv4_address #String
+        self.id #String
+        self.password #String
+        
     def update(self):
         pass
     

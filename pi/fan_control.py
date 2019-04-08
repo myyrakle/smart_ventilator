@@ -1,10 +1,10 @@
 import threading
 
 class FanController:
-    pin_number #Integer
-    locker #threading.Lock
     
-    __init__():
+    def __init__(self):
+        self.pin_number #Integer
+        self.locker = threading.Lock() #threading.Lock
         pass #pin_number=pin
     
     def on(self):

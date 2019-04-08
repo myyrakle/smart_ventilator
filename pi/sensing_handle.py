@@ -1,17 +1,22 @@
+from db_control import DBController
+from fan_control import FanController
+
 class SensingHandler:
-    co2_pin #Integer
-    co_pin #Integer
-    pm_pin #Integer
-    
-    co2_value #Float
-    co_value #Flaot
-    pm1_value #Float
-    pm2_value #Float
-    pm3_value #Float
-    
-    db_controller #DBController
-    
-    fan_controller #FanController
+
+    def __init__(self, fan, db):
+        self.co2_pin #Integer
+        self.co_pin #Integer
+        self.pm_pin #Integer
+        
+        self.co2_value #Float
+        self.co_value #Flaot
+        self.pm1_value #Float
+        self.pm2_value #Float
+        self.pm3_value #Float
+        
+        self.db_controller = fan #DBController
+        
+        self.fan_controller = db #FanController
     
     def start():
         pass
