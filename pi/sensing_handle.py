@@ -4,19 +4,19 @@ from fan_control import FanController
 class SensingHandler:
 
     def __init__(self, fan, db):
-        self.co2_pin #Integer
-        self.co_pin #Integer
-        self.pm_pin #Integer
+        self.co2_pin = None #Integer
+        self.co_pin = None #Integer
+        self.pm_pin = None #Integer
         
-        self.co2_value #Float
-        self.co_value #Flaot
-        self.pm1_value #Float
-        self.pm2_value #Float
-        self.pm3_value #Float
+        self.co2_value = None #Float
+        self.co_value = None #Flaot
+        self.pm1_value = None #Float
+        self.pm2_value = None #Float
+        self.pm3_value = None #Float
         
         self.db_controller = fan #DBController
         
         self.fan_controller = db #FanController
     
-    def start():
+    def start(self):
         pass

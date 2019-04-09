@@ -6,7 +6,7 @@ import socket
 class SocketHandler:
     
     def __init__(self, fan, db):
-        ipv4_my_address = '' #String
+        ipv4_my_address = '220.69.240.120' #String
         port = 12345 #Integer
         self.fan_controller = fan #FanController
         self.db_controller = db 
@@ -15,7 +15,8 @@ class SocketHandler:
         
         self.server_socket=socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.server_socket.bind(socket_address)
-        self.server_socket.listen(1)
+        self.server_socket.listen(5)
+        pass
     
 
     def start(self):
@@ -23,10 +24,10 @@ class SocketHandler:
         
         while True:
             client_socket, address = self.server_socket.accept()
-            print('@ client connected')
+            print('@ client connected {}'.format(address))
             # ...
             client_socket.close()
             pass
-        
+        pass
         
         

@@ -16,7 +16,9 @@ class MainHandler:
         
 
     def run(self):
-        socket_thread = threading.Thread(target=self.socket_handler.start)
-        socket_thread.start()
-        
+
+        # socket starts in other thread
+        threading.Thread(target=self.socket_handler.start).start()
+    
+        # sensing starts in main thread
         self.sensing_handler.start()
