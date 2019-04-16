@@ -1,4 +1,11 @@
 {
-    "string": "command" /*수행할 명령입니다.*/
-
+    "command": "on_fan | off_fan | check_fan | set_auto_control | get_current | get_datas",
+    "control_condition": {
+        "co":0,
+        "co2":0,
+        "pm1":0,
+        "pm2.5":0,
+        "pm10":0
+    },
+    "datas_offset": "time"
 }
