@@ -47,3 +47,8 @@ def get_co2_ppm():
     GPIO.cleanup()
     return AQ
 
+
+def main():
+    print('per {} ppm'.format(get_co2_ppm()) )
+    
+main()
