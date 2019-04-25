@@ -6,15 +6,13 @@ import socket
 class SocketHandler:
     
     def __init__(self, fan, db):
-        ipv4_my_address = '220.69.240.120' #String
+        #ipv4_my_address = '172.217.31.132' #String
         port = 12345 #Integer
         self.fan_controller = fan #FanController
-        self.db_controller = db 
-
-        socket_address=(ipv4_my_address, port) #make tuple
+        self.db_controller = db #Database Controller
         
-        self.server_socket=socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.server_socket.bind(socket_address)
+        self.server_socket=socket.socket()#(socket.AF_INET, socket.SOCK_STREAM)
+        self.server_socket.bind( ('', port) )
         self.server_socket.listen(5)
         pass
     

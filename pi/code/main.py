@@ -2,4 +2,7 @@
 
 from main_handler import MainHandler
 
-MainHandler().run()
+main = MainHandler()
+
+main.run()
+

@@ -16,7 +16,7 @@ class MainHandler:
         
 
     def run(self):
-
+        print('## Main Handler is running')
         # socket starts in other thread
         threading.Thread(target=self.socket_handler.start).start()
     
