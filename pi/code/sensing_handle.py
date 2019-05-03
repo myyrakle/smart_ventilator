@@ -14,7 +14,7 @@ class SensingHandler:
         self.fan_controller = fan #FanController
         
         
-        self.co2_limit = 1000
+        self.co2_limit = 1500
         self.co_limit = 10
         # self.pm1_limit = None # no use
         self.pm25_limit = 35
@@ -23,7 +23,7 @@ class SensingHandler:
         # safe range
         self.co2_safe = 700
         self.co_safe = 1
-        self.pm25_safe = 15
+        self.pm25_safe = 20
         self.pm10_safe = 30
         
         self.send_db_interval = None
@@ -70,7 +70,7 @@ class SensingHandler:
                 print('')
                 #test end
                 
-                #time.sleep(20)
+                time.sleep(1)
                 
             except:
                 #do nothing

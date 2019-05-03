@@ -1,9 +1,12 @@
 import serial
 
 
+S_PORT = "/dev/ttyUSB0"
+
+
 class Ze07UartReader:
     def __init__(self):
-        self.m_serial = serial.Serial("/dev/ttyUSB2", 9600)
+        self.m_serial = serial.Serial(S_PORT, 9600)
         self.m_stack = []
         
         
@@ -54,7 +57,7 @@ class Ze07UartReader:
                 # index 8 (check sum)
                 right_sum = self.m_serial.read()
                 if not self._check_sum(right_sum):
-                    #continue
+                    #return None 
                     pass
                     
                 #print('high:{}, low:{}'.format(self.m_stack[4], self.m_stack[5]))

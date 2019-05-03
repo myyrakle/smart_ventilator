@@ -1,6 +1,8 @@
 import serial
 import platform
 
+S_PORT = "/dev/ttyUSB1"
+
 p_ver = platform.python_version_tuple()[0]
 
 def connect_serial(serial_dev):
@@ -37,7 +39,7 @@ def pms7003(serial_dev):
     except:
         traceback.print_exc()
      
-def read(serial_dev="/dev/ttyUSB1"):
+def read(serial_dev=S_PORT):
     result = pms7003(serial_dev)
     if result is not None:
         return result

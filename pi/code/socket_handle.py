@@ -1,5 +1,6 @@
 from fan_control import FanController
 from db_control import DBController
+import os
 
 import socket
 
@@ -10,6 +11,8 @@ class SocketHandler:
         port = 12345 #Integer
         self.fan_controller = fan #FanController
         self.db_controller = db #Database Controller
+        
+        os.system('fuser -k -n tcp {}'.format(port))
         
         self.server_socket=socket.socket()#(socket.AF_INET, socket.SOCK_STREAM)
         self.server_socket.bind( ('', port) )
