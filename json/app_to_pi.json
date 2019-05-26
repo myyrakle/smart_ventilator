@@ -1,5 +1,5 @@
 {
-    "command": "on_fan | off_fan | check_fan | check_auto | set_auto_control | get_current | get_all",
+    "command": "on_fan | off_fan | check_fan | check_auto | set_auto | get_current | get_all",
     "control_condition": {
         "co":0,
         "co2":0,
