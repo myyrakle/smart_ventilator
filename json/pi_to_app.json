@@ -1,5 +1,5 @@
 {
-    "command": "return_current | return_data",
+    "command": "return_current | return_data | fan_on | auto_on",
     "current": {
         "co":0,
         "co2":0,
