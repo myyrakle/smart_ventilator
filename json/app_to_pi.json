@@ -3,7 +3,6 @@
     "control_condition": {
         "co":0,
         "co2":0,
-        "pm1":0,
         "pm25":0,
         "pm10":0
     },
