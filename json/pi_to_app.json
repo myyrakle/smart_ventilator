@@ -19,6 +19,6 @@
             }
         }
     ],
-    "fan_on": true
+    "fan_on": true,
     "auto_on": true
 }
