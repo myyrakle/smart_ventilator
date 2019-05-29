@@ -2,6 +2,7 @@ from fan_control import FanController
 from socket_handle import SocketHandler
 from sensing_handle import SensingHandler
 from db_control import DBController
+from shared_data import SharedData
 
 import threading
 
