@@ -17,18 +17,17 @@ class SensingHandler:
         self.db_controller = db #DBController
         self.fan_controller = fan #FanController
         
-        
-        self.co2_limit = 1500
+        self.co2_limit = 1000
         self.co_limit = 10
         # self.pm1_limit = None # no use
         self.pm25_limit = 35
         self.pm10_limit = 100
         
         # safe range
-        self.co2_safe = 800
+        self.co2_safe = 700
         self.co_safe = 1
         self.pm25_safe = 20
-        self.pm10_safe = 45#30
+        self.pm10_safe = 30
         
         self.send_db_interval = None
         self.send_app_interval = None
@@ -48,10 +47,10 @@ class SensingHandler:
                 if self.fan_controller.is_auto_mode():
                     if self.fan_controller.is_on():
                         print('fan is on')
-                        if self.co2_safe >= co2_value \
-                        and self.co_safe >= co_value \
-                        and self.pm25_safe >= pm_values['pm2.5'] \
-                        and self.pm10_safe >= pm_values['pm10']:
+                        if shared_data.datas.co2_safe >= co2_value \
+                        and shared_data.datas.co_safe >= co_value \
+                        and shared_data.datas.pm25_safe >= pm_values['pm2.5'] \
+                        and shared_data.datas.pm10_safe >= pm_values['pm10']:
                             print('@ try off')
                             self.fan_controller.off()
                             pass
@@ -59,10 +58,10 @@ class SensingHandler:
                         
                     else: # is off
                         print('fan is off')
-                        if self.co2_limit <= co2_value \
-                        or self.co_limit <= co_value \
-                        or self.pm25_limit <= pm_values['pm2.5'] \
-                        or self.pm10_limit <= pm_values['pm10']: 
+                        if shared_data.datas.co2_limit <= co2_value \
+                        or shared_data.datas.co_limit <= co_value \
+                        or shared_data.datas.pm25_limit <= pm_values['pm2.5'] \
+                        or shared_data.datas.pm10_limit <= pm_values['pm10']: 
                             self.fan_controller.on()
                             pass
                         pass

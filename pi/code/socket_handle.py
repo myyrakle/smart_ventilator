@@ -26,6 +26,7 @@ class SocketHandler:
         print('## Server is Running ##')
         
         while True:
+            print('\n# Server is Alive #\n')
             client_socket, address = self.server_socket.accept()
             
             print('@ client connected {}'.format(address))
@@ -72,17 +73,47 @@ class SocketHandler:
                 pass
             
             elif cmd == 'get_current':
-                data_to_send = {'command':'return_current', 'current': shared_data.datas.get_sensing()}
+                data_to_send = {'current': shared_data.datas.get_sensing()}
                 boom = json.JSONEncoder().encode(data_to_send).encode()
                 client_socket.sendall(boom)
                 pass
             
-            elif cmd == 'get_all':
+            
+            elif cmd == 'get_limit':
+                data_to_send = {'current': shared_data.datas.get_limit()}
+                boom = json.JSONEncoder().encode(data_to_send).encode()
+                client_socket.sendall(boom)
+                pass
+            
+            
+            elif cmd == 'get_safe':
+                data_to_send = {'current': shared_data.datas.get_safe()}
+                boom = json.JSONEncoder().encode(data_to_send).encode()
+                client_socket.sendall(boom)
+                pass
+            
+            
+            elif cmd == 'set_limit':
+                
+                pass
+            
+            
+            elif cmd == 'set_safe':
+                
+                pass
+            
+            elif cmd == 'get_data':
+                if dict_data['time_offset']=='today':
+                    data_to_send = db_controller.get_today()
+                    boom = json.JSONEncoder().encode(data_to_send).encode()
+                    client_socket.sendall(boom)
+                    pass
                 pass
             
             
             elif cmd == 'ok':
                 pass
+            
             
             else:
                 print('invalid command')
