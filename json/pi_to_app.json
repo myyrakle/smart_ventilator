@@ -1,19 +1,19 @@
 {
-    "current": {
+    "current": 
+    {
         "co":0,
         "co2":0,
         "pm25":0,
         "pm10":0
     },
-    "datas": [
+    "data": 
+    [
         {
-            "time": "time",
-            "data": {
-                "co":0,
-                "co2":0,
-                "pm25":0,
-                "pm10":0
-            }
+            "time": "2019-xx-xx ??:??:??",
+            "co":0,
+            "co2":0,
+            "pm25":0,
+            "pm10":0
         }
     ],
     "fan_on": true,
