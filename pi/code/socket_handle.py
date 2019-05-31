@@ -94,12 +94,12 @@ class SocketHandler:
             
             
             elif cmd == 'set_limit':
-                
+                shared_data.datas.set_limit(dict_data['modified_value'])
                 pass
             
             
             elif cmd == 'set_safe':
-                
+                shared_data.datas.set_safe(dict_data['modified_value'])
                 pass
             
             elif cmd == 'get_data':
