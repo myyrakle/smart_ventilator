@@ -103,8 +103,13 @@ class SocketHandler:
                 pass
             
             elif cmd == 'get_data':
-                if dict_data['time_offset']=='today':
-                    data_to_send = db_controller.get_today()
+                if dict_data['offset']=='today':
+                    data_to_send = self.db_controller.get_today(dict_data['datatype'])
+                    boom = json.JSONEncoder().encode(data_to_send).encode()
+                    client_socket.sendall(boom)
+                    pass
+                elif dict_data['offset']=='yesterday':
+                    data_to_send = self.db_controller.get_yesterday(dict_data['datatype'])
                     boom = json.JSONEncoder().encode(data_to_send).encode()
                     client_socket.sendall(boom)
                     pass

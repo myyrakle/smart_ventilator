@@ -11,6 +11,7 @@ class MainHandler:
     def __init__(self):
         self.fan_controller = FanController()
         self.db_controller = DBController()
+        self.db_controller.connect()
 
         self.socket_handler = SocketHandler(fan = self.fan_controller, db = self.db_controller)
         self.sensing_handler = SensingHandler(fan = self.fan_controller, db = self.db_controller)

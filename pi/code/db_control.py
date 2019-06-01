@@ -1,5 +1,6 @@
 import threading
 import pymysql
+from datetime import datetime, timedelta
 
 class DBController:
     
@@ -16,6 +17,7 @@ class DBController:
         self.connector = pymysql.connect(host='127.0.0.1', user= self.id, \
              password = self.password, db='smart_vent', charset='utf8')
         self.cursor = self.connector.cursor()
+        print('$$ DB is connected')
         
     def disconnect(self):
         self.connector.commit()
@@ -44,30 +46,56 @@ class DBController:
     def insert_sensing(self, pm10, pm25, co, co2, log):
         self.locker.acquire()
         
-        self.connect()
+        #self.connect()
         
         query = 'INSERT INTO sensing VALUES(0, now(), {}, {}, {}, {}, "");'.format(pm10, pm25, co, co2, log)
         self.cursor.execute(query)
         
         self.connector.commit()
         
+        
+        
         self.locker.release()
         pass
     
-    def get_today():
+    def get_today(self, datatype):
         self.locker.acquire()
         
         self.connect()
-        query = 'select time, pm10, pm25, co, co2 from sensing where time>"{} 00:00:00"'.format(str(datetime.now().date()))
+        query = 'select time, {} from sensing where time>="{} 00:00:00"'.format(datatype, str(datetime.now().date()))
         
-        cursor.execute(query)
-        result = cursor.fetchall()
+        self.cursor.execute(query)
+        result = self.cursor.fetchall()
         self.locker.release()
 
         array = []
 
         for e in result:
-            array.append({ 'time':e[0], 'pm10':e[1], 'pm25':e[2], 'co':e[3], 'co2':e[4]})
+            time = e[0].hour*100 + e[0].minute
+            array.append({ 'time':time, 'value':e[1]})
+            
+        return {'data' : array}
+    
+    
+    def get_yesterday(self, datatype):
+        self.locker.acquire()
+        
+        self.connect()
+        
+        today = datetime.now()
+        yester = datetime.now() - timedelta(days=1) 
+        
+        query = 'select time, {} from sensing where time<"{} 00:00:00" and time>="{} 00:00:00"'.format(datatype, str(today.date()), str(yester.date()))
+        
+        self.cursor.execute(query)
+        result = self.cursor.fetchall()
+        self.locker.release()
+
+        array = []
+
+        for e in result:
+            time = e[0].hour*100 + e[0].minute
+            array.append({ 'time':time, 'value':e[1]})
             
         return {'data' : array}
         

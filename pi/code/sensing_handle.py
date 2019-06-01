@@ -9,7 +9,7 @@ import pms7003 as pm
 import datetime
 import time
 
-DB_INSERT_INTERVAL_SEC = 300
+#DB_INSERT_INTERVAL_SEC = 1800
 
 class SensingHandler:
 
@@ -17,26 +17,21 @@ class SensingHandler:
         self.db_controller = db #DBController
         self.fan_controller = fan #FanController
         
-        self.co2_limit = 1000
-        self.co_limit = 10
-        # self.pm1_limit = None # no use
-        self.pm25_limit = 35
-        self.pm10_limit = 100
-        
-        # safe range
-        self.co2_safe = 700
-        self.co_safe = 1
-        self.pm25_safe = 20
-        self.pm10_safe = 30
-        
         self.send_db_interval = None
         self.send_app_interval = None
     
     
     def start(self):
         print('## Sensing is Running ##')
-        start_sec = time.time()+DB_INSERT_INTERVAL_SEC
+        now_minute = datetime.datetime.now().minute
+        start_minute = 0
         
+        if now_minute < 30:
+            start_minute = 30
+        else:
+            start_minute = 0
+
+
         while True:
             
             try:
@@ -74,7 +69,7 @@ class SensingHandler:
                 #test begin
                 print('co2: {}'.format(co2_value))
                 print('co: {}'.format(co_value))
-                print('pm1.0: {}'.format(pm_values['pm1.0']))
+                #print('pm1.0: {}'.format(pm_values['pm1.0']))
                 print('pm2.5: {}'.format(pm_values['pm2.5']))
                 print('pm10: {}'.format(pm_values['pm10']))
                 print('')
@@ -82,17 +77,22 @@ class SensingHandler:
                 
                 shared_data.datas.set_sensing(pm_values['pm1.0'], pm_values['pm2.5'], co_value, co2_value)
                 
-                end_sec = time.time()
                 
-                if end_sec-start_sec >= DB_INSERT_INTERVAL_SEC:
-                    start_sec = time.time()
+                now_minute = datetime.datetime.now().minute
+                if start_minute==now_minute:
+                    if start_minute == 0:
+                        start_minute = 30
+                        pass
+                    else:
+                        start_minute = 0
+                        pass
                     
                     self.db_controller.insert_sensing \
                       (pm10=pm_values['pm10'], \
                        pm25=pm_values['pm2.5'], \
                        co=co_value, co2=co2_value, log='')
                     pass
-                    
+                
                     
             except:
                 pass    
