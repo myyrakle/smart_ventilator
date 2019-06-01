@@ -7,5 +7,5 @@
         "pm25":0,
         "pm10":0
     },
-    "offset": "today | time"
+    "offset": "today | yesterday"
 }
